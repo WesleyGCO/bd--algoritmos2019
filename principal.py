@@ -1,15 +1,24 @@
 import sqlite3
 import usuario
-import romaneio
+# import romaneio
 import cliente
 import peca
+import getpass from getpass
 
+
+# usuario.criar_tab_usuario(conexao)
+# peca.criar_tab_peca(conexao)
+## romaneio.criar_tab_romaneio()
+# cliente.criar_tab_cliente(conexao)
+
+# =======================================================
 
 def conferir_usuario(conexao):
+    usuario.listar_usuario(conexao)
     cursor = conexao.cursor()
 
     log = input("Login: ")
-    sen = input("Senha: ")
+    sen = getpass("Senha: ")
 
     sql = """ 
         SELECT rowid, * FROM usuario;
@@ -27,8 +36,8 @@ def conferir_usuario(conexao):
                 ==== MENU PRINCIPAL ==== \t\t
                 
                 1. Registrar peça
-                2. Gerar romaneio
-                3. Registrar cliente
+                2. Registrar cliente
+                3. Gerar romaneio
                 4. Relatório de peças
                 5. Relatório de cadastro de clientes
                 6. Relatório de romaneios
@@ -40,9 +49,9 @@ def conferir_usuario(conexao):
                     if (opcao == 1):
                         peca.inserir_peca(conexao)
                     elif (opcao == 2):
-                        romaneio.
-                    elif (opcao == 3):
                         cliente.inserir_cliente(conexao)
+                    elif (opcao == 3):
+                        #     # romaneio.
                     elif (opcao == 4):
                         relatar 
                     elif (opcao == 5):
@@ -56,3 +65,13 @@ def conferir_usuario(conexao):
                         print("Opção inválida!")
             elif (log != c[2] or sen != c[3]):
                 print("Login ou senha inválida, deseja continuar (S/N)?: ")
+                
+
+
+conexao = sqlite3.connect("banco.sqlite3")
+
+
+conferir_usuario(conexao)
+
+
+conexao.close()
