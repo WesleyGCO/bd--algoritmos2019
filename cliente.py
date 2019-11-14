@@ -17,6 +17,7 @@ def criar_tab_cliente(conexao):
     #Executa
     cursor.execute(sql)
 
+
 def inserir_cliente(conexao):
     nome = input("Nome completo: ")
     rg = input("RG: ")
@@ -48,6 +49,9 @@ def inserir_cliente(conexao):
     print("Dados inseridos com sucesso!")
 
 
+# ======================================================
+
+
 def listar_cliente(conexao):
     cursor = conexao.cursor()
 
@@ -55,6 +59,7 @@ def listar_cliente(conexao):
         SELECT rowid, * FROM cliente;
     """
     listacli = cursor.fetchall()
+    cursor.execute(sql)
 
     print("\n\t ===== Listando clientes =====")
 
@@ -64,5 +69,3 @@ def listar_cliente(conexao):
         Nome: {}
         RG: {}
         Celular: {}""".format(i[0], i[1], i[2], i[4]))
-
-
