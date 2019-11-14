@@ -9,17 +9,16 @@ def criar_tab_romaneio(conexao):
 
     sql = """
         CREATE TABLE IF NOT EXISTS romaneio (
-           preco_final INTEGER NOT NULL,
+           preco_final REAL (9,2) NOT NULL,
            dtvenda DATE NOT NULL,
            idusu INTEGER NOT NULL,
            idcli INTEGER NOT NULL,
            idpec INTEGER NOT NULL,
            FOREIGN KEY (idusu) REFERENCES usuario (rowid),
            FOREIGN KEY (idcli) REFERENCES cliente (rowid),
-           FOREIGN KEY (idpec) REFERENCES peca (rowid) 
+           FOREIGN KEY (idpec) REFERENCES peca (rowid)
         );"""
-    
-    
+
     cursor.execute(sql)
 
-def criar_romaneio(conexao):
+# =====================================
