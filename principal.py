@@ -1,24 +1,49 @@
 import sqlite3
 import usuario
-# import romaneio
+import romaneio
 import cliente
 import peca
-import getpass from getpass
+import relatorio
+from getpass import getpass
+from datetime import datetime
 
+
+conexao = sqlite3.connect("banco.sqlite3")
 
 # usuario.criar_tab_usuario(conexao)
 # peca.criar_tab_peca(conexao)
-## romaneio.criar_tab_romaneio()
+# romaneio.criar_tab_romaneio(conexao)
 # cliente.criar_tab_cliente(conexao)
 
 # =======================================================
+def exibirMenu():
+    print("""
+            ==== MENU PRINCIPAL ==== 
+                
+            1. Registrar peça nova
+            2. Adicionar peça existente
+            3. Registrar cliente
+            4. Gerar romaneio
+            5. Relatório de peças
+            6. Relatório de cadastro de clientes
+            7. Relatório de romaneios
+            8. Sair
+            """)
+
+# =======================================================
+
 
 def conferir_usuario(conexao):
-    usuario.listar_usuario(conexao)
     cursor = conexao.cursor()
 
+    print("BEM VINDO AO SISTEMA!")
+    print(" ")
     log = input("Login: ")
     sen = getpass("Senha: ")
+
+    now = datetime.now()
+    print("Login realizado na data: ", now.day, "/", now.month, "/", now.year, "às", now.hour, "hrs", now.minute, "min", now.second, "sec")
+    print(" ")
 
     sql = """ 
         SELECT rowid, * FROM usuario;
@@ -29,48 +54,35 @@ def conferir_usuario(conexao):
     listaconf = cursor.fetchall()
 
     for c in listaconf:
-        while(True):
-
             if (log == c[2] and sen == c[3]):
-                print("""
-                ==== MENU PRINCIPAL ==== \t\t
-                
-                1. Registrar peça
-                2. Registrar cliente
-                3. Gerar romaneio
-                4. Relatório de peças
-                5. Relatório de cadastro de clientes
-                6. Relatório de romaneios
-                7. Sair
-                """)
-
-                opcao = int(input("Digite a opção escolhida: "))
                 while(True):
+                    exibirMenu()
+                    opcao = int(input("Digite a opção escolhida: "))
                     if (opcao == 1):
-                        peca.inserir_peca(conexao)
+                        peca.inserir_peca_nova(conexao)
                     elif (opcao == 2):
-                        cliente.inserir_cliente(conexao)
+                        peca.inserir_peca_existente(conexao)
                     elif (opcao == 3):
-                        #     # romaneio.
+                        cliente.inserir_cliente(conexao)
                     elif (opcao == 4):
-                        relatar 
+                        peca.listar_peca(conexao)
                     elif (opcao == 5):
-                        relatar
+                        peca.listar_peca(conexao)                                                
                     elif (opcao == 6):
-                        relatar
+                        cliente.listar_cliente(conexao)
                     elif (opcao == 7):
+                        relatorio.relatar_romaneio(conexao, "relatórios.txt")
+                    elif (opcao == 8):
                         print("Você selecionou a opção de sair, até a próxima!")
                         break
                     else:
                         print("Opção inválida!")
-            elif (log != c[2] or sen != c[3]):
+            else:
                 print("Login ou senha inválida, deseja continuar (S/N)?: ")
-                
 
 
-conexao = sqlite3.connect("banco.sqlite3")
 
-
+# usuario.inserir_usuario(conexao)
 conferir_usuario(conexao)
 
 
