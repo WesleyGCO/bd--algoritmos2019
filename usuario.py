@@ -54,3 +54,4 @@ def listar_usuario(conexao):
         ID: {}
         Nome: {}
         Usuário: {}""".format(u[0], u[1], u[2]))
+        
