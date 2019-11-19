@@ -58,8 +58,9 @@ def listar_cliente(conexao):
     sql = """ 
         SELECT rowid, * FROM cliente;
     """
-    listacli = cursor.fetchall()
     cursor.execute(sql)
+    listacli = cursor.fetchall()
+    
 
     print("\n\t ===== Listando clientes =====")
 
@@ -69,3 +70,21 @@ def listar_cliente(conexao):
         Nome: {}
         RG: {}
         Celular: {}""".format(i[0], i[1], i[2], i[4]))
+
+
+def escolher_cli(conexao):
+    cursor = conexao.cursor()
+
+    sql = """ 
+        SELECT rowid, * FROM cliente;
+    """
+    listacli = cursor.fetchall()
+    cursor.execute(sql)
+
+    print("Escolha o cliente: ")
+
+    for i in listacli:
+        print("""
+        ID: {}
+        Nome: {}
+        RG: {}""".format(i[0], i[1], i[2]))
