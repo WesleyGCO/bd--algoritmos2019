@@ -10,12 +10,14 @@ from datetime import datetime
 
 conexao = sqlite3.connect("banco.sqlite3")
 
-# usuario.criar_tab_usuario(conexao)
-# peca.criar_tab_peca(conexao)
-# romaneio.criar_tab_romaneio(conexao)
-# cliente.criar_tab_cliente(conexao)
+usuario.criar_tab_usuario(conexao)
+peca.criar_tab_peca(conexao)
+romaneio.criar_tab_romaneio(conexao)
+cliente.criar_tab_cliente(conexao)
 
 # =======================================================
+
+
 def exibirMenu():
     print("""
             ==== MENU PRINCIPAL ==== 
@@ -65,13 +67,13 @@ def conferir_usuario(conexao):
                     elif (opcao == 3):
                         cliente.inserir_cliente(conexao)
                     elif (opcao == 4):
-                        peca.listar_peca(conexao)
+                        romaneio.gerar_romaneio(conexao)
                     elif (opcao == 5):
-                        peca.listar_peca(conexao)                                                
+                        peca.listar_peca(conexao)
                     elif (opcao == 6):
                         cliente.listar_cliente(conexao)
                     elif (opcao == 7):
-                        relatorio.relatar_romaneio(conexao, "relatórios.txt")
+                        relatorio.relatar_romaneio(conexao)
                     elif (opcao == 8):
                         print("Você selecionou a opção de sair, até a próxima!")
                         break
@@ -81,8 +83,11 @@ def conferir_usuario(conexao):
                 print("Login ou senha inválida, deseja continuar (S/N)?: ")
 
 
-
 # usuario.inserir_usuario(conexao)
+# usuario.listar_usuario(conexao)
+# peca.listar_peca(conexao)
+
+
 conferir_usuario(conexao)
 
 
