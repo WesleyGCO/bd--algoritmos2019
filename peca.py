@@ -3,7 +3,7 @@ def criar_tab_peca(conexao):
     cursor = conexao.cursor()
 
     sql = """ 
-        CREATE TABLE peca (
+        CREATE TABLE IF NOT EXISTS peca (
             descricao TEXT NOT NULL,
             quant TEXT NOT NULL,
             preco REAL (9,2) NOT NULL
@@ -11,9 +11,8 @@ def criar_tab_peca(conexao):
 
     cursor.execute(sql)
 
+
 # Inserção das informações da peça
-
-
 def inserir_peca_nova(conexao):
     descricao = input("Descrição da peça: ")
     quant = input("Quantidade: ")
@@ -82,3 +81,25 @@ def listar_peca(conexao):
         Descrição: {}
         Quantidade: {}
         Preço cada unidade: {}""".format(p[0], p[1], p[2], p[3]))
+
+
+def escolher_pec(conexao):
+    cursor = conexao.cursor()
+
+    sql = """
+        SELECT rowid, * FROM peca
+        """
+    cursor.execute(sql)
+    listapeca = cursor.fetchall()
+
+    print("Escolha a peça: ")
+
+    for p in listapeca:
+        print("""
+        ID: {}
+        Descrição: {}
+        Preço cada unidade: {}""".format(p[0], p[1], p[3]))
+    
+    x = int(input("Digite o ID da peça: "))
+    return x
+
