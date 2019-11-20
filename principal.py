@@ -91,4 +91,5 @@ def conferir_usuario(conexao):
 conferir_usuario(conexao)
 
 
+
 conexao.close()
