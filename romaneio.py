@@ -37,7 +37,7 @@ def gerar_romaneio(conexao):
     print(" ")
     idpec = peca.escolher_pec(conexao)
     preco = float(input("Preço unitário: "))
-    precof = preco * quantidade
+    precof = print("Preço final: ", preco * quantidade)
 
     sql = """ SELECT rowid, * FROM peca    
         """
@@ -70,7 +70,4 @@ def gerar_romaneio(conexao):
     cursor.execute(sql_insercao)
     conexao.commit()
     
-    print("Romaneio criado com sucesso!")
-    
- 
-    
+    print("Romaneio criado com sucesso!") 
