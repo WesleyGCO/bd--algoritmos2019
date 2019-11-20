@@ -92,14 +92,12 @@ def escolher_pec(conexao):
     cursor.execute(sql)
     listapeca = cursor.fetchall()
 
-    print("Escolha a peça: ")
+    print("==== Peças ====")
 
     for p in listapeca:
         print("""
         ID: {}
         Descrição: {}
-        Preço cada unidade: {}""".format(p[0], p[1], p[3]))
-    
+        Preço unitário: {}""".format(p[0], p[1], p[3]))
     x = int(input("Digite o ID da peça: "))
     return x
-
