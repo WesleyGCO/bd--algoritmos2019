@@ -30,7 +30,7 @@ def relatar_romaneio(conexao):
     print("\t\t==== RELATÓRIO DE ROMANEIOS ====")
     print(" ")
     for u in listarel:
-            if (data == u[4]):
+            if (data >= u[4]):
 
                 print("""
                 Usuário: {}
