@@ -92,4 +92,3 @@ def escolher_cli(conexao):
     x = input("Qual o ID do cliente: ")
     return x
 
-
