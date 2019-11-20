@@ -2,6 +2,7 @@ import peca
 import usuario
 import cliente
 import sqlite3
+from datetime import datetime
 
 
 # Criação da tabela romaneio
@@ -27,21 +28,17 @@ def criar_tab_romaneio(conexao):
 
 def gerar_romaneio(conexao):
     cursor = conexao.cursor()
-
-    dtvenda = input("Data da venda: ")
-    quantidade = input("Quantidade de peças: ")
+    now = datetime.now()
+    dtvenda = print("Data: ", now.day, "/", now.month, "/", now.year)
+    quantidade = int(input("Quantidade de peças: "))
     idusu = input("ID do usuário: ")
     print(" ")
-    cliente.listar_cliente(conexao)
+    idcli = cliente.escolher_cli(conexao)
     print(" ")
-    idcli = input("ID do cliente: ")
-    print(" ")
-    peca.listar_peca(conexao)
-    print(" ")
-    idpec = input("ID da peça: ")
-    precofinal = input("Preço: ")
+    idpec = peca.escolher_pec(conexao)
+    preco = float(input("Preço unitário: "))
+    precof = preco * quantidade
 
-    
     sql = """ SELECT rowid, * FROM peca    
         """
     cursor.execute(sql)
@@ -57,7 +54,7 @@ def gerar_romaneio(conexao):
             """.format(atual_quan, idpec)
             
             cursor.execute(sql)
-            cursor.commit()
+            conexao.commit()
             print(" ")
 
     sql_insercao = """
@@ -68,10 +65,12 @@ def gerar_romaneio(conexao):
             '{}',
             '{}',
             '{}'
-        );""".format(dtvenda, quantidade, precofinal, idusu, idcli, idpec)
+        );""".format(dtvenda, quantidade, precof, idusu, idcli, idpec)
 
     cursor.execute(sql_insercao)
     conexao.commit()
     
     print("Romaneio criado com sucesso!")
+    
+ 
     
