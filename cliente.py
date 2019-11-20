@@ -78,13 +78,18 @@ def escolher_cli(conexao):
     sql = """ 
         SELECT rowid, * FROM cliente;
     """
-    listacli = cursor.fetchall()
+    
     cursor.execute(sql)
+    listacli = cursor.fetchall()
 
-    print("Escolha o cliente: ")
+    print("==== Clientes ==== ")
 
     for i in listacli:
         print("""
         ID: {}
         Nome: {}
         RG: {}""".format(i[0], i[1], i[2]))
+    x = input("Qual o ID do cliente: ")
+    return x
+
+
