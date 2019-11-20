@@ -42,7 +42,6 @@ def conferir_usuario(conexao):
     print(" ")
     log = input("Login: ")
     sen = getpass("Senha: ")
-
     now = datetime.now()
     print("Login realizado na data: ", now.day, "/", now.month, "/", now.year, "às", now.hour, "hrs", now.minute, "min", now.second, "sec")
     print(" ")
@@ -58,6 +57,9 @@ def conferir_usuario(conexao):
     for c in listaconf:
             if (log == c[2] and sen == c[3]):
                 while(True):
+                    now = datetime.now()
+                    print("Login realizado na data: ", now.day, "/", now.month, "/", now.year, "às", now.hour, "hrs", now.minute, "min", now.second, "sec")
+                    print(" ")
                     exibirMenu()
                     opcao = int(input("Digite a opção escolhida: "))
                     if (opcao == 1):
@@ -80,7 +82,7 @@ def conferir_usuario(conexao):
                     else:
                         print("Opção inválida!")
             else:
-                print("Login ou senha inválida, deseja continuar (S/N)?: ")
+                print("Usuário e/ou senha incorretos!")
 
 
 # usuario.inserir_usuario(conexao)
@@ -89,7 +91,6 @@ def conferir_usuario(conexao):
 
 
 conferir_usuario(conexao)
-
 
 
 conexao.close()
